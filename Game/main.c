@@ -32,7 +32,8 @@ struct Liste
 Plateau* creer_plateau(int lignes, int colonnes);
 Joueur* creer_joueur(char pions);
 Liste* initialisation(int lignes);
-void afficherListe(Liste *liste);
+void afficherListe(Liste *listej2, Plateau* plateau,Joueur joueur);
+void afficher_plateau(Plateau* plateau);
 
 int main()
 {
@@ -40,11 +41,16 @@ int main()
     int i;
     for (i = 0; i < 2; i++)
     {
-        printf("J%d choisi un charactere: \n", i+1);
-        scanf(" %c", &(joueurs[i].pion));
+        joueurs[i].pion = (char)219;
         joueurs[i].victoires = 0;
     }
     printf("Hello world!\n");
+    Plateau* plateau = creer_plateau(21, 21);
+    Liste* listej1 = initialisation(6);
+    Liste* listej2 = initialisation(16);
+    afficherListe(listej2, plateau, joueurs[0]);
+    afficherListe(listej1, plateau, joueurs[1]);
+    afficher_plateau(plateau);
     return 0;
 }
 
@@ -82,14 +88,14 @@ Liste* initialisation(int lignes)
         exit(EXIT_FAILURE);
     }
 
-    position->colonne = 21;
+    position->colonne = 12;
     position->ligne = lignes;
     position->suivant = NULL;
     liste->premier = position;
 
     return liste;
 }
-void afficherListe(Liste *liste)
+void afficherListe(Liste *liste, Plateau* plateau,Joueur joueur)
 {
     if (liste == NULL)
     {
@@ -100,8 +106,38 @@ void afficherListe(Liste *liste)
 
     while (actuel != NULL)
     {
-        printf("%d -> ", actuel->colonne);
+        plateau->grille[actuel->ligne][actuel->colonne] = joueur.pion;
+        printf("%d : %d ->", actuel->ligne, actuel->colonne);
         actuel = actuel->suivant;
     }
-    printf("NULL\n");
+    printf("\n");
+}
+
+void afficher_plateau(Plateau* plateau)
+{
+    for(int i = 0; i < plateau->colonnes; i++)
+    {
+        printf("%d",i+1);
+    }
+    printf("\n");
+    for(int i = 0; i < plateau->lignes; i++)
+    {
+        printf("%d",i+1);
+        for(int n = 0; n < plateau->colonnes; n++)
+        {
+            switch(plateau -> grille[i][n])
+            {
+            case '.':
+                printf(".");
+                break;
+            case 'A':
+                printf("%c", (char)196);
+                break;
+            case 'X':
+                printf("%c", (char)196);
+                break;
+            }
+        }
+        printf("\n");
+    }
 }
