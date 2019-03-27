@@ -10,30 +10,17 @@ typedef struct Plateau
 
 typedef struct Joueur
 {
+    int colonne;
+    int ligne;
     int victoires;
     char pion;
 } Joueur;
 
-
-typedef struct Position Position;
-struct Position
-{
-    int colonne;
-    int ligne;
-    Position* suivant;
-};
-
-typedef struct Liste Liste;
-struct Liste
-{
-    Position* premier;
-};
-
 Plateau* creer_plateau(int lignes, int colonnes);
 Joueur* creer_joueur(char pions);
-Liste* initialisation(int lignes);
-void afficherListe(Liste *listej2, Plateau* plateau,Joueur joueur);
 void afficher_plateau(Plateau* plateau);
+void pos_initial(Joueur* joueur, int nombre, Plateau* plateau);
+void deplacement(Joueur* joueur, Plateau* plateau);
 
 int main()
 {
@@ -41,15 +28,17 @@ int main()
     int i;
     for (i = 0; i < 2; i++)
     {
-        joueurs[i].pion = (char)219;
         joueurs[i].victoires = 0;
     }
+    joueurs[0].pion = 'X';
+    joueurs[1].pion = 'A';
     printf("Hello world!\n");
     Plateau* plateau = creer_plateau(21, 21);
-    Liste* listej1 = initialisation(6);
-    Liste* listej2 = initialisation(16);
-    afficherListe(listej2, plateau, joueurs[0]);
-    afficherListe(listej1, plateau, joueurs[1]);
+    afficher_plateau(plateau);
+    pos_initial(&joueurs[0], 6, plateau);
+    pos_initial(&joueurs[0], 16, plateau);
+    afficher_plateau(plateau);
+    deplacement(&joueurs[0], plateau);
     afficher_plateau(plateau);
     return 0;
 }
@@ -76,41 +65,8 @@ Joueur* creer_joueur(char pions)
     Joueur* joueur = malloc(sizeof(Joueur));
     joueur->pion = pions;
     joueur->victoires = 0;
+    joueur->ligne = 0;
     return joueur;
-}
-Liste* initialisation(int lignes)
-{
-    Liste* liste = malloc(sizeof(*liste));
-    Position* position = malloc(sizeof(*position));
-
-    if (liste == NULL || position == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
-
-    position->colonne = 12;
-    position->ligne = lignes;
-    position->suivant = NULL;
-    liste->premier = position;
-
-    return liste;
-}
-void afficherListe(Liste *liste, Plateau* plateau,Joueur joueur)
-{
-    if (liste == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
-
-    Position *actuel = liste->premier;
-
-    while (actuel != NULL)
-    {
-        plateau->grille[actuel->ligne][actuel->colonne] = joueur.pion;
-        printf("%d : %d ->", actuel->ligne, actuel->colonne);
-        actuel = actuel->suivant;
-    }
-    printf("\n");
 }
 
 void afficher_plateau(Plateau* plateau)
@@ -141,3 +97,37 @@ void afficher_plateau(Plateau* plateau)
         printf("\n");
     }
 }
+
+void pos_initial(Joueur* joueur, int nombre, Plateau* plateau)
+{
+    plateau->grille[20][nombre] = joueur->pion;
+    joueur->colonne = nombre;
+    joueur->ligne = 20;
+
+}
+
+void deplacement(Joueur* joueur, Plateau* plateau)
+{
+    char direction;
+    printf("Quelle est la direction (N/S/E/W):\n");
+    scanf(" %c", &direction);
+    switch(direction)
+    {
+    case'N':
+        joueur->ligne = joueur->ligne -1;
+        break;
+    case'S':
+        joueur->ligne = joueur->ligne +1;
+        break;
+    case'E':
+        joueur->colonne = joueur->colonne + 1;
+        break;
+    case'W':
+        joueur->colonne = joueur->colonne - 1;
+        break;
+    }
+    plateau->grille[joueur->ligne][joueur->colonne] = joueur->pion;
+}
+
+
+
