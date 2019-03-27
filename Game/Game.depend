@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1553701888 source:c:\users\benja\desktop\projet-c-game\game\tron.c
+	<stdio.h>
+	<stdint.h>
+
