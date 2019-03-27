@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1553704737 source:c:\users\20180412\desktop\puissance 4\conio.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	"conio.h"
+
+1553704737 c:\users\20180412\desktop\puissance 4\conio.h
+	<stdio.h>
+
+1553711502 source:c:\users\20180412\desktop\puissance 4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"conio.h"
+
