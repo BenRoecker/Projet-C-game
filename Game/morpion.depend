@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1553704187 source:c:\users\20180412\desktop\morpion\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	"morpion.h"
+
+1553699567 c:\users\20180412\desktop\morpion\conio.h
+	<stdio.h>
+
+1553699567 source:c:\users\20180412\desktop\morpion\conio.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	"conio.h"
+
+1553704101 c:\users\20180412\desktop\morpion\morpion_func.h
+
+1553704129 source:c:\users\20180412\desktop\morpion\morpion.c
+	"morpion_func.h"
+	"morpion.h"
+
+1553703945 c:\users\20180412\desktop\morpion\morpion.h
+
