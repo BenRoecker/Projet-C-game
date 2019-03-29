@@ -3,7 +3,19 @@
 	<stdio.h>
 	<stdint.h>
 
-1553711820 source:c:\users\benja\desktop\projet-c-game\game\main.c
+1553878467 source:c:\users\benja\desktop\projet-c-game\game\main.c
 	<stdio.h>
 	<stdlib.h>
+	"conio.h"
+
+1553628107 source:c:\users\benja\desktop\projet-c-game\game\conio.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	"conio.h"
+
+1553628114 c:\users\benja\desktop\projet-c-game\game\conio.h
+	<stdio.h>
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "conio.h"
 
 typedef struct Plateau
 {
@@ -20,26 +21,59 @@ Plateau* creer_plateau(int lignes, int colonnes);
 Joueur* creer_joueur(char pions);
 void afficher_plateau(Plateau* plateau);
 void pos_initial(Joueur* joueur, int nombre, Plateau* plateau);
-void deplacement(Joueur* joueur, Plateau* plateau);
+int deplacement(Joueur* joueur, Plateau* plateau, int numerojoueur);
+int defaite(Joueur* joueur, Plateau* plateau);
+void initialiser_plateau(Plateau* plateau);
 
 int main()
 {
+    char rejouer;
     Joueur joueurs[2];
     int i;
     for (i = 0; i < 2; i++)
     {
         joueurs[i].victoires = 0;
     }
-    joueurs[0].pion = 'X';
-    joueurs[1].pion = 'A';
-    printf("Hello world!\n");
+    joueurs[0].pion = 'A';
+    joueurs[1].pion = 'X';
     Plateau* plateau = creer_plateau(21, 21);
-    afficher_plateau(plateau);
-    pos_initial(&joueurs[0], 6, plateau);
-    pos_initial(&joueurs[0], 16, plateau);
-    afficher_plateau(plateau);
-    deplacement(&joueurs[0], plateau);
-    afficher_plateau(plateau);
+    do
+    {
+        int victoire;
+        int tour = 1;
+        initialiser_plateau(plateau);
+        pos_initial(&joueurs[0], 6, plateau);
+        pos_initial(&joueurs[1], 16, plateau);
+        do
+        {
+            afficher_plateau(plateau);
+            gotoxy(1,27);
+            printf("Tour %d", tour);
+            gotoxy(1,28);
+            textcolor(LIGHTCYAN);
+            printf("c'est au joueur 1 de jouer");
+            textcolor(WHITE);
+            victoire = deplacement(&joueurs[0], plateau, 1);
+            if (victoire == 1)
+            {
+                break;
+            }
+            afficher_plateau(plateau);
+            gotoxy(1,28);
+            textcolor(LIGHTRED);
+            printf("c'est au joueur 2 de jouer");
+            textcolor(WHITE);
+            victoire = deplacement(&joueurs[1], plateau, 2);
+            afficher_plateau(plateau);
+            tour ++;
+        }while(victoire == 0);
+        afficher_plateau(plateau);
+        do
+        {
+            printf("voulez vous rejouer ? (Y/N)");
+            scanf(" %c", &rejouer);
+        }while (rejouer != 'Y' && rejouer != 'N');
+    }while (rejouer == 'Y');
     return 0;
 }
 
@@ -73,61 +107,132 @@ void afficher_plateau(Plateau* plateau)
 {
     for(int i = 0; i < plateau->colonnes; i++)
     {
+        gotoxy(i*2+18,5);
         printf("%d",i+1);
     }
-    printf("\n");
     for(int i = 0; i < plateau->lignes; i++)
     {
+        gotoxy(16,i+6);
         printf("%d",i+1);
         for(int n = 0; n < plateau->colonnes; n++)
         {
+            gotoxy(n*2+18,i+6);
             switch(plateau -> grille[i][n])
             {
             case '.':
                 printf(".");
                 break;
             case 'A':
-                printf("%c", (char)196);
+                textcolor(LIGHTCYAN);
+                printf("%c", (char)254);
                 break;
             case 'X':
-                printf("%c", (char)196);
+                textcolor(LIGHTRED);
+                printf("%c", (char)254);
                 break;
             }
+            textcolor(WHITE);
         }
-        printf("\n");
     }
 }
 
 void pos_initial(Joueur* joueur, int nombre, Plateau* plateau)
 {
-    plateau->grille[20][nombre] = joueur->pion;
+    plateau->grille[10][nombre] = joueur->pion;
     joueur->colonne = nombre;
-    joueur->ligne = 20;
+    joueur->ligne = 10;
 
 }
 
-void deplacement(Joueur* joueur, Plateau* plateau)
+int deplacement(Joueur* joueur, Plateau* plateau,int numerojoueur)
 {
+    int non_victoire = 0;
     char direction;
-    printf("Quelle est la direction (N/S/E/W):\n");
-    scanf(" %c", &direction);
+    do
+    {
+        gotoxy(1,29);
+        printf("Quelle est la direction (N/S/E/W):");
+        scanf(" %c", &direction);
+    }while (direction != 'N' && direction != 'S' && direction != 'E' && direction != 'W');
+    clrscr();
     switch(direction)
     {
     case'N':
-        joueur->ligne = joueur->ligne -1;
+        if (joueur->ligne == 0)
+        {
+            non_victoire = 1;
+        }
+        else
+        {
+            joueur->ligne = joueur->ligne -1;
+        }
         break;
     case'S':
-        joueur->ligne = joueur->ligne +1;
+        if (joueur->ligne == 20)
+        {
+            non_victoire = 1;
+        }
+        else
+        {
+            joueur->ligne = joueur->ligne +1;
+        }
         break;
     case'E':
-        joueur->colonne = joueur->colonne + 1;
+        if (joueur->colonne == 20)
+        {
+            non_victoire = 1;
+        }
+        else
+        {
+            joueur->colonne = joueur->colonne + 1;
+        }
         break;
     case'W':
-        joueur->colonne = joueur->colonne - 1;
+        if (joueur->colonne == 0)
+        {
+            non_victoire = 1;
+        }
+        else
+        {
+            joueur->colonne = joueur->colonne - 1;
+        }
         break;
     }
-    plateau->grille[joueur->ligne][joueur->colonne] = joueur->pion;
+    if(non_victoire == 1 || defaite(joueur, plateau))
+    {
+        gotoxy(1,31);
+        printf("Joueur %d a perdu.", numerojoueur);
+        return 1;
+    }
+    else
+    {
+        plateau->grille[joueur->ligne][joueur->colonne] = joueur->pion;
+        return 0;
+    }
 }
 
 
 
+int defaite(Joueur* joueur, Plateau* plateau)
+{
+    if(plateau->grille[joueur->ligne][joueur->colonne] != '.')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+ void initialiser_plateau(Plateau* plateau)
+ {
+     int i,j;
+     for (i = 0; i < plateau->colonnes; i++)
+     {
+         for (j = 0; j < plateau->lignes; j++)
+         {
+             plateau->grille[i][j] = '.';
+         }
+     }
+ }
