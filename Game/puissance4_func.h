@@ -28,5 +28,6 @@ int obtenir_entree(Plateau* plateau);
 void jouer(Plateau* plateau, char symbole, int coords[2]);
 void afficher_plateau(Plateau* plateau);
 void affichage(Plateau* plateau, int tours, int meilleure_combi_save[2]);
+void afficher_victoire(Plateau* plateau, Joueur joueurs[2], int vainqueur);
 
 #endif // PUISSANCE4_FUNC_H_INCLUDED

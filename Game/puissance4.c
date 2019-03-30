@@ -39,38 +39,7 @@ void puissance4()
                 break;
             }
         }
-        clrscr();
-        afficher_plateau(plateau);
-        switch(vainqueur)
-        {
-        case -1:
-            printf("\n\nEgalite, personne ne gagne.\n");
-            break;
-        case 0: //le joueur 1 gagne
-            joueurs[0].victoires++;
-            printf("\n\nLe vainqueur est le joueur ");
-            textcolor(LIGHTRED);
-            printf("%c",(char)254);
-            textcolor(WHITE);
-            break;
-        case 1: //le joueur 2 gagne
-            joueurs[1].victoires++;
-            printf("\n\nLe vainqueur est le joueur ");
-            textcolor(LIGHTRED);
-            printf("%c",(char)254);
-            textcolor(WHITE);
-            break;
-        }
-        printf("\n\nScores :\n");
-        textcolor(LIGHTRED);
-        printf("%c",(char)254);
-        textcolor(WHITE);
-        printf(" : %d\n",joueurs[0].victoires);
-        textcolor(YELLOW);
-        printf("%c",(char)254);
-        textcolor(WHITE);
-        printf(" : %d\n",joueurs[1].victoires);
-
+        afficher_victoire(plateau, joueurs, vainqueur);
         do
         {
             printf("\nRefaire une partie ? (Y/N)\n");

@@ -337,3 +337,38 @@ void affichage(Plateau* plateau, int tours, int meilleure_combi_save[2])
     textcolor(WHITE);
     printf(" est de taille %d", meilleure_combi_save[1]);
 }
+
+void afficher_victoire(Plateau* plateau, Joueur joueurs[2], int vainqueur)
+{
+    clrscr();
+    afficher_plateau(plateau);
+    switch(vainqueur)
+    {
+    case -1:
+        printf("\n\nEgalite, personne ne gagne.\n");
+        break;
+    case 0: //le joueur 1 gagne
+        joueurs[0].victoires++;
+        printf("\n\nLe vainqueur est le joueur ");
+        textcolor(LIGHTRED);
+        printf("%c",(char)254);
+        textcolor(WHITE);
+        break;
+    case 1: //le joueur 2 gagne
+        joueurs[1].victoires++;
+        printf("\n\nLe vainqueur est le joueur ");
+        textcolor(YELLOW);
+        printf("%c",(char)254);
+        textcolor(WHITE);
+        break;
+    }
+    printf("\n\nScores :\n");
+    textcolor(LIGHTRED);
+    printf("%c",(char)254);
+    textcolor(WHITE);
+    printf(" : %d\n",joueurs[0].victoires);
+    textcolor(YELLOW);
+    printf("%c",(char)254);
+    textcolor(WHITE);
+    printf(" : %d\n",joueurs[1].victoires);
+}

@@ -15,3 +15,36 @@
 	<stdlib.h>
 	"conio.h"
 
+1553682992 source:c:\users\enzo filangi\desktop\projet-c-game-puissance-4\game\conio.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	"conio.h"
+
+1553682992 c:\users\enzo filangi\desktop\projet-c-game-puissance-4\game\conio.h
+	<stdio.h>
+
+1553682992 source:c:\users\enzo filangi\desktop\projet-c-game-puissance-4\game\main.c
+	<stdio.h>
+	<stdlib.h>
+	"conio.h"
+
+1553939313 source:c:\users\enzo filangi\desktop\projet-c-game-puissance-4\game\puissance4.c
+	<stdio.h>
+	<stdlib.h>
+	"puissance4.h"
+	"puissance4_func.h"
+	"conio.h"
+
+1553682992 c:\users\enzo filangi\desktop\projet-c-game-puissance-4\game\puissance4.h
+
+1553939446 c:\users\enzo filangi\desktop\projet-c-game-puissance-4\game\puissance4_func.h
+
+1553939378 source:c:\users\enzo filangi\desktop\projet-c-game-puissance-4\game\puissance4_func.c
+	<stdio.h>
+	<stdlib.h>
+	"puissance4_func.h"
+	"conio.h"
+
