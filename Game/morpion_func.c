@@ -39,9 +39,9 @@ void displayGrid(Plateau* plateau, Joueur joueurs[2])
     textcolor(YELLOW);
     for (i=0; i < GRID_SIZE; i++)
     {
-        gotoxy(i*2+18,3);
+        gotoxy(i*2+18,4);
         printf("%d",i+1);
-        gotoxy(16,i+4);
+        gotoxy(16,i+5);
         printf("%d",i+1);
     }
     for(i=0; i<GRID_SIZE; i++)
@@ -61,39 +61,70 @@ void displayGrid(Plateau* plateau, Joueur joueurs[2])
             {
                 textcolor(WHITE);
             }
-            gotoxy(n*2+18,i+4);
+            gotoxy(n*2+18,i+5);
             printf("%c",temp);
         }
     }
     textcolor(WHITE);
 }
 
-void display(Plateau* plateau, Joueur joueurs[2], int player_num)
+void display(Plateau* plateau, Joueur joueurs[2], int tours)
 {
+    int player_num = 2-(tours%2);
     clrscr();
+    gotoxy(17,2);
+    printf("Tour %d", tours);
     displayGrid(plateau, joueurs);
-    gotoxy(16,8);
+    gotoxy(16,9);
     printf("Scores :");
-    gotoxy(4,10);
+    gotoxy(4,11);
     if(player_num == 1)
     {
         textbackground(GREEN);
         printf("Joueur 1 : %d", joueurs[0].victoires);
         textbackground(BLACK);
-        gotoxy(24,10);
+        gotoxy(24,11);
         printf("Ordinateur : %d", joueurs[1].victoires);
     }
     else
     {
         printf("Joueur 1 : %d", joueurs[0].victoires);
         textbackground(LIGHTRED);
-        gotoxy(24,10);
+        gotoxy(24,11);
         printf("Joueur 2 : %d", joueurs[1].victoires);
         textbackground(BLACK);
     }
 }
 
-void get_input(int tab[2], int GRID_SIZE)
+void displayWin(Plateau* plateau, Joueur joueurs[2], int tours)
+{
+    clrscr();
+    displayGrid(plateau, joueurs);
+    gotoxy(11,9);
+    printf("Le joueur %d gagne !",2-(tours%2));
+    joueurs[1-(tours%2)].victoires += 1;
+    gotoxy(16,11);
+    printf("Scores :");
+    gotoxy(4,13);
+    printf("Joueur 1 : %d", joueurs[0].victoires);
+    gotoxy(24,13);
+    printf("Ordinateur : %d", joueurs[1].victoires);
+}
+void displayDraw(Plateau* plateau, Joueur joueurs[2])
+{
+    clrscr();
+    displayGrid(plateau, joueurs);
+    gotoxy(11,9);
+    printf("Personne ne gagne !");
+    gotoxy(16,11);
+    printf("Scores :");
+    gotoxy(4,13);
+    printf("Joueur 1 : %d", joueurs[0].victoires);
+    gotoxy(24,13);
+    printf("Ordinateur : %d", joueurs[1].victoires);
+}
+
+void getInput(int tab[2], int GRID_SIZE)
 {
     printf("\n\nDans quelle colonne jouer ? [1,%d]\n",GRID_SIZE);
     scanf("%d",&tab[1]);
@@ -118,11 +149,11 @@ void play(Plateau* plateau, int player_num, Joueur joueurs[2])
     int coords[2];
     if(player_num == 1)
     {
-        get_input(coords, plateau -> lignes);
+        getInput(coords, plateau -> lignes);
         while(plateau -> grille[coords[0]][coords[1]] != '.')
         {
             printf("\nVeuillez entrer des coordonnees valides\n");
-            get_input(coords, plateau -> lignes);
+            getInput(coords, plateau -> lignes);
         }
         plateau -> grille[coords[0]][coords[1]] = joueurs[0].pion;
     }

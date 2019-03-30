@@ -25,3 +25,34 @@
 
 1553703945 c:\users\20180412\desktop\morpion\morpion.h
 
+1553676028 source:c:\users\enzo filangi\desktop\projet-c-game-morpion\game\conio.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	"conio.h"
+
+1553676028 c:\users\enzo filangi\desktop\projet-c-game-morpion\game\conio.h
+	<stdio.h>
+
+1553676028 source:c:\users\enzo filangi\desktop\projet-c-game-morpion\game\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"morpion.h"
+
+1553676028 c:\users\enzo filangi\desktop\projet-c-game-morpion\game\morpion.h
+
+1553940959 source:c:\users\enzo filangi\desktop\projet-c-game-morpion\game\morpion_func.c
+	<windows.h>
+	"morpion_func.h"
+	"conio.h"
+
+1553940734 c:\users\enzo filangi\desktop\projet-c-game-morpion\game\morpion_func.h
+
+1553940977 source:c:\users\enzo filangi\desktop\projet-c-game-morpion\game\morpion.c
+	"morpion_func.h"
+	"morpion.h"
+	"conio.h"
+
