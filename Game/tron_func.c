@@ -24,12 +24,10 @@ Joueur* creer_joueur(char pions)
 {
     Joueur* joueur = malloc(sizeof(Joueur));
     joueur->pion = pions;
-    joueur->victoires = 0;
-    joueur->ligne = 11;
     return joueur;
 }
 
-void afficher_plateau(Plateau* plateau)
+void afficher_plateau(Plateau* plateau, Joueur* joueur[2])
 {
     for(int i = 0; i < plateau->lignes; i++)
     {
@@ -39,15 +37,30 @@ void afficher_plateau(Plateau* plateau)
             switch(plateau -> grille[i][n])
             {
             case '.':
+                textcolor(WHITE);
                 printf(".");
                 break;
             case 'A':
                 textcolor(LIGHTCYAN);
-                printf("%c", (char)254);
+                if(joueur[0]->ligne == i && joueur[0]->colonne == n)
+                {
+                    printf("%c", (char)219);
+                }
+                else
+                {
+                    printf("%c", (char)254);
+                }
                 break;
             case 'X':
                 textcolor(LIGHTRED);
-                printf("%c", (char)254);
+                if(joueur[1]->ligne == i && joueur[1]->colonne == n)
+                {
+                    printf("%c", (char)219);
+                }
+                else
+                {
+                    printf("%c", (char)254);
+                }
                 break;
             }
             textcolor(WHITE);
@@ -102,7 +115,7 @@ void affichage(Joueur* joueur[2], Plateau* plateau, int tour)
     textcolor(YELLOW);
     gotoxy(29, 3);
     printf("Les Pietons de tron");
-    afficher_plateau(plateau);
+    afficher_plateau(plateau, joueur);
     affichage_point(joueur);
     gotoxy(1,27);
     printf("Tour %d", tour+1);
@@ -119,10 +132,13 @@ void affichage(Joueur* joueur[2], Plateau* plateau, int tour)
     textcolor(WHITE);
 }
 
-void affichage_defaite(Joueur* joueur[2], int tour)
+void affichage_defaite(Joueur* joueur[2], Plateau* plateau, int tour)
 {
-    gotoxy(1,31);
-    printf("Joueur %d a perdu.", tour%2+1);
+    joueur[tour%2] -> ligne = -1;
+    joueur[tour%2] -> colonne = -1;
+    affichage(joueur, plateau, tour);
+    gotoxy(1,30);
+    printf("Joueur %d a perdu.\n", tour%2+1);
 }
 
 void obtenir_entree(Joueur* joueur[2],int tour)
@@ -187,8 +203,6 @@ void detruire_plateau(Plateau** adr_plateau)
     {
         free(plateau->grille[i]);
     }
-    free(plateau->lignes);
-    free(plateau->colonnes);
     free(plateau);
     *adr_plateau = NULL;
 }
@@ -196,10 +210,97 @@ void detruire_plateau(Plateau** adr_plateau)
 void detruire_joueurs(Joueur** adr_joueur)
 {
     Joueur* joueur = *adr_joueur;
-    free(joueur->victoires);
-    free(joueur->ligne);
-    free(joueur->colonne);
-    free(joueur->pion);
     free(joueur);
     *adr_joueur = NULL;
 }
+
+
+chained_list* create_chained()
+{
+    chained_list* liste = malloc(sizeof(chained_list));
+    initialize_chained(liste, 0, 0, ' ');
+    return liste;
+}
+void initialize_chained(chained_list* element, int ligne, int colonne, char pion)
+{
+    element->ligne = ligne;
+    element->colonne = colonne;
+    element->pion = pion;
+    element->next = NULL;
+}
+void append_chained(chained_list* element, int ligne, int colonne, char pion)
+{
+    if(element->next == NULL)
+    {
+        element->next = malloc(sizeof(chained_list));
+        initialize_chained(element->next, ligne, colonne, pion);
+    }
+    else
+    {
+        append_chained(element->next, ligne, colonne, pion);
+    }
+}
+void destroy_chained(chained_list* element)
+{
+    if(element->next != NULL)
+    {
+        destroy_chained(element->next);
+    }
+    free(element);
+}
+
+void rejouer_partie(chained_list* replay)
+{
+    clrscr();
+    Plateau* plateau = creer_plateau(21, 21);
+    chained_list* element = replay;
+    int tour = 0;
+    Joueur* joueurs[2];
+    joueurs[0] = creer_joueur('A');
+    joueurs[1] = creer_joueur('X');
+    while(1)
+    {
+
+        textcolor(YELLOW);
+        gotoxy(23, 3);
+        printf("Les Pietons de tron [REPLAY]");
+        textcolor(WHITE);
+        afficher_plateau(plateau, joueurs);
+        joueurs[tour%2]->ligne = element->ligne;
+        joueurs[tour%2]->colonne = element->colonne;
+        Sleep(300);
+        if(element->next != NULL)
+        {
+            positionner_pion(joueurs, plateau, tour);
+            element = element->next;
+        }
+        else
+        {
+            joueurs[tour%2] -> ligne = -1;
+            joueurs[tour%2] -> colonne = -1;
+            break;
+        }
+        tour++;
+    }
+    clrscr();
+    textcolor(YELLOW);
+    gotoxy(23, 3);
+    printf("Les Pietons de tron [REPLAY]");
+    textcolor(WHITE);
+    afficher_plateau(plateau, joueurs);
+    detruire_plateau(&plateau);
+    detruire_joueurs(&joueurs[0]);
+    detruire_joueurs(&joueurs[1]);
+}
+
+
+
+
+
+
+
+
+
+
+
+

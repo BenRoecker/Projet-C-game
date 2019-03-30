@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1553932040 source:c:\users\enzo filangi\desktop\tron\conio.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	"conio.h"
+
+1553932040 c:\users\enzo filangi\desktop\tron\conio.h
+	<stdio.h>
+
+1553967038 source:c:\users\enzo filangi\desktop\tron\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tron.h"
+
+1553932040 c:\users\enzo filangi\desktop\tron\tron.h
+
+1553975770 source:c:\users\enzo filangi\desktop\tron\tron.c
+	"tron_func.h"
+	"tron.h"
+	"conio.h"
+
+1553975037 c:\users\enzo filangi\desktop\tron\tron_func.h
+
+1553975859 source:c:\users\enzo filangi\desktop\tron\tron_func.c
+	<windows.h>
+	"tron_func.h"
+	"conio.h"
+
