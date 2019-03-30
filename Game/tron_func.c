@@ -1,84 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "tron.h"
+#include <windows.h>
 
-int main()
-{
-    tron();
-    return 0;
-}
-/*
-typedef struct Plateau
-{
-    int lignes;
-    int colonnes;
-    char** grille;
-} Plateau;
-
-typedef struct Joueur
-{
-    int colonne;
-    int ligne;
-    int victoires;
-    char pion;
-} Joueur;
-
-Plateau* creer_plateau(int lignes, int colonnes);
-Joueur* creer_joueur(char pions);
-void afficher_plateau(Plateau* plateau);
-void pos_initial(Joueur* joueur, int nombre, Plateau* plateau);
-int defaite(Joueur* joueur[2], Plateau* plateau,int tour);
-void initialiser_plateau(Plateau* plateau);
-void affichage(Joueur* joueur[2], Plateau* plateau, int tour);
-void affichage_defaite(Joueur* joueur[2], int tour);
-void obtenir_entree(Joueur* joueur[2],int tour);
-void positionner_pion(Joueur* joueur[2], Plateau* plateau,int tour);
-void attribution_point(Joueur* joueur[2],int tour);
-void affichage_point(Joueur* joueur[2]);
-void detruire_plateau(Plateau** adr_plateau);
-void detruire_joueurs(Joueur** adr_joueur);
-
-int main()
-{
-    char rejouer;
-    int tour = 0;
-    Joueur* joueurs[2];
-    joueurs[0] = creer_joueur('A');
-    joueurs[1] = creer_joueur('X');
-    Plateau* plateau = creer_plateau(21, 21);
-    do
-    {
-        tour = 0;
-        initialiser_plateau(plateau);
-        pos_initial(joueurs[0], 6, plateau);
-        pos_initial(joueurs[1], 14, plateau);
-        do
-        {
-            affichage(joueurs, plateau, tour);
-            obtenir_entree(joueurs, tour);
-            if (!defaite(joueurs, plateau, tour))
-            {
-                positionner_pion(joueurs, plateau, tour);
-            }
-            else
-            {
-                affichage_defaite(joueurs, tour);
-                break;
-            }
-            tour ++;
-        }while(1);
-        attribution_point(joueurs, tour);
-        do
-        {
-            printf("voulez vous rejouer ? (Y/N)");
-            scanf(" %c", &rejouer);
-        }while (rejouer != 'Y' && rejouer != 'N');
-    }while (rejouer == 'Y');
-    detruire_plateau(&plateau);
-    detruire_joueurs(&joueurs[0]);
-    detruire_joueurs(&joueurs[1]);
-    return 0;
-}
+#include "tron_func.h"
+#include "conio.h"
 
 Plateau* creer_plateau(int lignes, int colonnes)
 {
@@ -279,4 +202,4 @@ void detruire_joueurs(Joueur** adr_joueur)
     free(joueur->pion);
     free(joueur);
     *adr_joueur = NULL;
-}*/
+}

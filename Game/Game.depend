@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1553701888 source:c:\users\benja\desktop\projet-c-game\game\tron.c
+1553879307 source:c:\users\benja\desktop\projet-c-game\game\tron.c
 	<stdio.h>
 	<stdint.h>
 
-1553878467 source:c:\users\benja\desktop\projet-c-game\game\main.c
+1553952516 source:c:\users\benja\desktop\projet-c-game\game\main.c
 	<stdio.h>
 	<stdlib.h>
 	"conio.h"
