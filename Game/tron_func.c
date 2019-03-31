@@ -43,7 +43,7 @@ void afficher_plateau(Plateau* plateau, Joueur* joueur[2])
                 break;
             case 'A':
                 textcolor(LIGHTCYAN);
-                if(joueur[0]->ligne == i && joueur[0]->colonne == n)\\condition pour afficher la tete de serpent
+                if(joueur[0]->ligne == i && joueur[0]->colonne == n)//condition pour afficher la tete de serpent
                 {
                     printf("%c", (char)219);
                 }
@@ -54,7 +54,7 @@ void afficher_plateau(Plateau* plateau, Joueur* joueur[2])
                 break;
             case 'X':
                 textcolor(LIGHTRED);
-                if(joueur[1]->ligne == i && joueur[1]->colonne == n)\\condition pour afficher la tete de serpent
+                if(joueur[1]->ligne == i && joueur[1]->colonne == n)//condition pour afficher la tete de serpent
                 {
                     printf("%c", (char)219);
                 }
@@ -82,13 +82,13 @@ int defaite(Joueur* joueur[2], Plateau* plateau,int tour)
     if (joueur[tour%2]->ligne == -1 ||
         joueur[tour%2]->ligne == 21 ||
         joueur[tour%2]->colonne == -1 ||
-        joueur[tour%2]->colonne == 21)\\ Condition de sortie du plateau
+        joueur[tour%2]->colonne == 21)//Condition de sortie du plateau
     {
         return 1;
     }
     else
     {
-        if(plateau->grille[joueur[tour%2]->ligne][joueur[tour%2]->colonne] != '.')\\ condition entree dans soi-meme ou autre joueurs
+        if(plateau->grille[joueur[tour%2]->ligne][joueur[tour%2]->colonne] != '.')//condition entree dans soi-meme ou autre joueurs
         {
             return 1;
         }
@@ -142,7 +142,7 @@ void affichage_defaite(Joueur* joueur[2], Plateau* plateau, int tour)
     printf("Joueur %d a perdu.\n", tour%2+1);
 }
 
-void obtenir_entree(Joueur* joueur[2],int tour)\\ Choix des coordonnee americaine
+void obtenir_entree(Joueur* joueur[2],int tour)//Choix des coordonnee americaine
 {
     char direction;
     gotoxy(1,29);
@@ -216,7 +216,7 @@ void detruire_joueurs(Joueur** adr_joueur)
 }
 
 
-chained_list* create_chained()\\ Utiliation liste chainee 
+chained_list* create_chained()// Utiliation liste chainee 
 {
     chained_list* liste = malloc(sizeof(chained_list));
     initialize_chained(liste, 0, 0, ' ');
