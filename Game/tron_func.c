@@ -23,6 +23,7 @@ Plateau* creer_plateau(int lignes, int colonnes)
 Joueur* creer_joueur(char pions)
 {
     Joueur* joueur = malloc(sizeof(Joueur));
+    joueur->victoires = 0;
     joueur->pion = pions;
     return joueur;
 }
