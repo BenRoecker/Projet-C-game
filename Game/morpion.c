@@ -4,6 +4,7 @@
 
 void morpion()
 {
+    //Création des données générales
     Plateau* plateau;
     char continuer = 'Y';
     int tours;
@@ -16,8 +17,10 @@ void morpion()
     }
     do
     {
+        //Initialisation des données de la partie
         tours = 1;
         plateau = creer_plateau(3, 3);
+        //Boucle de logique principale
         while(1)
         {
             display(plateau, joueurs, tours);
