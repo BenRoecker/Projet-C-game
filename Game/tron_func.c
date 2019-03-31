@@ -47,7 +47,7 @@ void afficher_plateau(Plateau* plateau, Joueur* joueur[2])
                 {
                     printf("%c", (char)219);
                 }
-                else\\sinon on affiche le caractère du corps
+                else//sinon on affiche le caractère du corps
                 {
                     printf("%c", (char)254);
                 }
@@ -151,7 +151,7 @@ void obtenir_entree(Joueur* joueur[2],int tour)//Choix des coordonnee americaine
         printf("Ou veux-tu aller ?(N/S/E/W)\n");
         scanf(" %c", &direction);
         printf("\n");
-    }while (direction != 'N' && direction != 'S' && direction != 'E' && direction != 'W');\\blindage des entrees
+    }while (direction != 'N' && direction != 'S' && direction != 'E' && direction != 'W');//blindage des entrees
     clrscr();
     switch(direction)
     {
