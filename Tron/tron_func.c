@@ -131,7 +131,7 @@ void obtenir_entree(Joueur* joueur[2],int tour)//Choix des coordonnee americaine
     do
     {
         printf("Ou veux-tu aller ?(N/S/E/W)\n");
-        scanf(" %c", &direction);
+        direction = getch();
         printf("\n");
     }while (direction != 'N' && direction != 'S' && direction != 'E' && direction != 'W');//blindage des entrees
     clrscr();

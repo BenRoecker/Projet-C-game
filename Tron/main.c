@@ -50,7 +50,7 @@ void tron()
         do
         {
             printf("Voulez vous voir le replay ? (Y/N)\n");
-            scanf(" %c", &show_replay);
+            show_replay = getch();
         }while (show_replay != 'Y' && show_replay != 'N');
         if(show_replay == 'Y')
         {
@@ -60,7 +60,7 @@ void tron()
         do
         {
             printf("\nVoulez vous rejouer ? (Y/N)\n");
-            scanf(" %c", &rejouer);
+            rejouer = getch();
         }while (rejouer != 'Y' && rejouer != 'N');
         clrscr();
         destroy_chained(replay);
