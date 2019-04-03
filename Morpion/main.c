@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "conio.h"
 #include "morpion_func.h"
 
 void morpion();
@@ -51,7 +52,7 @@ void morpion()
         do
         {
             printf("\n\nVoulez-vous rejouer ? [Y/N]\n");
-            scanf(" %c",&continuer);
+            continuer = getch();
         }
         while(continuer != 'Y' && continuer != 'N');
         detruire_plateau(&plateau);

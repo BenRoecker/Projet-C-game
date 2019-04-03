@@ -109,18 +109,22 @@ void displayDraw(Plateau* plateau, Joueur joueurs[2])
 void getInput(int tab[2], int GRID_SIZE)
 {
     printf("\n\nDans quelle colonne jouer ? [1,%d]\n",GRID_SIZE);
-    scanf("%d",&tab[1]);
+    tab[1] = (int)(getch()-'0');
+    printf("%d\n",tab[1]);
     while(tab[1] < 1 || tab[1] > GRID_SIZE) //On vérifie que le nombre indiqué soit bien dans les limites du plateau
     {
         printf("\nVeuillez entrer un nombre entre 1 et %d\n",GRID_SIZE);
-        scanf("%d",&tab[1]);
+        tab[1] = (int)(getch()-'0');
+        printf("%d\n",tab[1]);
     }
     printf("\nDans quelle ligne jouer ? [1,%d]\n",GRID_SIZE);
-    scanf("%d",&tab[0]);
+    tab[0] = (int)(getch()-'0');
+    printf("%d\n",tab[0]);
     while(tab[0] < 1 || tab[0] > GRID_SIZE) //Idem
     {
         printf("\nVeuillez entrer un nombre entre 1 et %d\n",GRID_SIZE);
-        scanf("%d",&tab[0]);
+        tab[0] = (int)(getch()-'0');
+        printf("%d\n",tab[0]);
     }
     //Noter qu'on ne vérifie pas ici si la case est vide
     //Retour multiple
