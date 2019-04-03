@@ -52,7 +52,7 @@ void puissance4()
         do
         {
             printf("\nRefaire une partie ? (Y/N)\n");
-            scanf(" %c",&continuer);
+            continuer = getch();
         }
         while(continuer != 'Y' && continuer != 'N');
         detruire_plateau(&plateau);
