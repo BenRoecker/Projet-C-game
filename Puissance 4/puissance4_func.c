@@ -218,12 +218,12 @@ int obtenir_entree(Plateau* plateau)
 {
     printf("\n\n\nDans quelle colonne jouer ?\n");
     int asw;
-    scanf("%d",&asw);
+    asw = (int)(getch()-'0');
     while(asw < 1 || asw > (plateau -> colonnes)) //Si l'utilisateur rentre une valeur en dehors des limites
     {
         //On redemande jusqu'à ce qu'il donne une valeur correcte
         printf("Veuillez entrer un nombre compris entre 1 et %d (inclus)\n",plateau -> colonnes);
-        scanf(" %d",&asw);
+        asw = (int)(getch()-'0');
         //Noter qu'on ne vérifie pas ici si la colonne est vide ou non
     }
     return asw-1; //On a demandé à l'utilisateur une valeur entre 1 et X car plus intuitif pour un humain, mais on converti derrière pour l'ordinateur
